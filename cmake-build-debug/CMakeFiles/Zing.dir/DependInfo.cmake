@@ -4,7 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/genius/Zing/epoll.cpp" "/home/genius/Zing/cmake-build-debug/CMakeFiles/Zing.dir/epoll.cpp.o"
   "/home/genius/Zing/main.cpp" "/home/genius/Zing/cmake-build-debug/CMakeFiles/Zing.dir/main.cpp.o"
+  "/home/genius/Zing/threadpool.cpp" "/home/genius/Zing/cmake-build-debug/CMakeFiles/Zing.dir/threadpool.cpp.o"
   "/home/genius/Zing/util.cpp" "/home/genius/Zing/cmake-build-debug/CMakeFiles/Zing.dir/util.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

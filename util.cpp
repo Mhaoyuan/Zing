@@ -2,6 +2,8 @@
 // Created by genius on 18-8-7.
 //
 #include <sys/socket.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <fcntl.h>
@@ -9,6 +11,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <unistd.h>
 #include "util.h"
 //#include "util.h"
 
@@ -53,6 +56,58 @@ int read_conf(char* filename,Z_conf_t* conf ){
     }
     fclose(fp);
     return Z_CONF_OK;
-
 }
 
+int socket_bind_listen(int port){
+    port = ((port<=1024)||(port >= 65535)? 6666: port);
+
+    int listen_fd = 0;
+    if(listen_fd = socket(AF_INET, SOCK_STREAM, 0)==-1)
+    {
+        perror("socket:");
+        return -1;
+    }
+    int optval = 1;
+    if(setsockopt(listen_fd, SOL_SOCKET,SO_REUSEADDR ,(const void*)optval, sizeof(int)) == -1){
+        perror("setsockopt:");
+        return -2;
+    }
+
+    struct  sockaddr_in serveraddr;
+    bzero((char*)&serveraddr, sizeof(serveraddr));
+    serveraddr.sin_family = AF_INET;
+    serveraddr.sin_port = htons(port);
+    serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    if(bind(listen_fd, (struct sockaddr*)&serveraddr, sizeof(serveraddr)) == -1)
+    {
+        perror("bind:");
+        return -3;
+    }
+
+    if(listen(listen_fd, LISTENQ) == -1) {
+        perror("listen");
+        return -4;
+    }
+    return listen_fd;
+}
+
+int make_socket_non_blocking(int fd){
+    int flag = fcntl(fd,F_GETFL,0);
+    if(flag -1 )
+        return -1;
+    flag|=O_NONBLOCK;
+    if(fcntl(fd, F_SETFL, flag) ==-1)
+        return -1;
+}
+
+void accept_connection(int listen_fd, int epoll_fd, char* path){
+    struct sockaddr_in client_addr;
+    memset(&client_addr, 0 , sizeof(struct sockaddr_in));
+    socklen_t client_addr_len = 0;
+    int accept_fd = accept(listen_fd, (struct sockaddr*)&client_addr, &client_addr_len);
+    if(accept_fd==-1) {
+        perror("accpt:");
+    }
+
+    int rc = make_socket_non_blocking(accept_fd);
+}

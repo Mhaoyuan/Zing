@@ -84,7 +84,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/genius/Zing/epoll.cpp">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/epoll.h">
+			<Option target="Zing"/>
+		</Unit>
 		<Unit filename="/home/genius/Zing/main.cpp">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/threadpool.cpp">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/threadpool.h">
 			<Option target="Zing"/>
 		</Unit>
 		<Unit filename="/home/genius/Zing/util.cpp">

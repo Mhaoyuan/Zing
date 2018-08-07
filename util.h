@@ -21,7 +21,7 @@ typedef struct  Z_conf{
 }Z_conf_t;
 
 int read_conf(char* filename,Z_conf_t* conf );
-
+int socket_bind_listen(int port);
 
 #endif //ZING_UTIL_H
 

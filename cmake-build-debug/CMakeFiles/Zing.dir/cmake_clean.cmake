@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Zing.dir/main.cpp.o"
   "CMakeFiles/Zing.dir/util.cpp.o"
+  "CMakeFiles/Zing.dir/epoll.cpp.o"
+  "CMakeFiles/Zing.dir/threadpool.cpp.o"
   "Zing.pdb"
   "Zing"
 )

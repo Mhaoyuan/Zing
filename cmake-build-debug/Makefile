@@ -123,6 +123,33 @@ Zing/fast:
 	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/build
 .PHONY : Zing/fast
 
+epoll.o: epoll.cpp.o
+
+.PHONY : epoll.o
+
+# target to build an object file
+epoll.cpp.o:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/epoll.cpp.o
+.PHONY : epoll.cpp.o
+
+epoll.i: epoll.cpp.i
+
+.PHONY : epoll.i
+
+# target to preprocess a source file
+epoll.cpp.i:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/epoll.cpp.i
+.PHONY : epoll.cpp.i
+
+epoll.s: epoll.cpp.s
+
+.PHONY : epoll.s
+
+# target to generate assembly for a file
+epoll.cpp.s:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/epoll.cpp.s
+.PHONY : epoll.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -149,6 +176,33 @@ main.s: main.cpp.s
 main.cpp.s:
 	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+threadpool.o: threadpool.cpp.o
+
+.PHONY : threadpool.o
+
+# target to build an object file
+threadpool.cpp.o:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/threadpool.cpp.o
+.PHONY : threadpool.cpp.o
+
+threadpool.i: threadpool.cpp.i
+
+.PHONY : threadpool.i
+
+# target to preprocess a source file
+threadpool.cpp.i:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/threadpool.cpp.i
+.PHONY : threadpool.cpp.i
+
+threadpool.s: threadpool.cpp.s
+
+.PHONY : threadpool.s
+
+# target to generate assembly for a file
+threadpool.cpp.s:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/threadpool.cpp.s
+.PHONY : threadpool.cpp.s
 
 util.o: util.cpp.o
 
@@ -186,9 +240,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Zing"
+	@echo "... epoll.o"
+	@echo "... epoll.i"
+	@echo "... epoll.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... threadpool.o"
+	@echo "... threadpool.i"
+	@echo "... threadpool.s"
 	@echo "... util.o"
 	@echo "... util.i"
 	@echo "... util.s"
