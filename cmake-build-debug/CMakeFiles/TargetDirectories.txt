@@ -1,0 +1,3 @@
+/home/genius/Zing/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/genius/Zing/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/genius/Zing/cmake-build-debug/CMakeFiles/Zing.dir

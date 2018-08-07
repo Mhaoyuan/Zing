@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/genius/Zing/main.cpp
+iostream
+-
+util.h
+/home/genius/Zing/util.h
+
+/home/genius/Zing/util.cpp
+sys/socket.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+fcntl.h
+-
+stdio.h
+-
+string.h
+-
+stdlib.h
+-
+signal.h
+-
+util.h
+/home/genius/Zing/util.h
+
+/home/genius/Zing/util.h
+
