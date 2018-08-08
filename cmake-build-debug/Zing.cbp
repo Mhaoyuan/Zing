@@ -90,6 +90,9 @@
 		<Unit filename="/home/genius/Zing/epoll.h">
 			<Option target="Zing"/>
 		</Unit>
+		<Unit filename="/home/genius/Zing/error.h">
+			<Option target="Zing"/>
+		</Unit>
 		<Unit filename="/home/genius/Zing/http.cpp">
 			<Option target="Zing"/>
 		</Unit>
@@ -112,6 +115,12 @@
 			<Option target="Zing"/>
 		</Unit>
 		<Unit filename="/home/genius/Zing/main.cpp">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/rio.cpp">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/rio.h">
 			<Option target="Zing"/>
 		</Unit>
 		<Unit filename="/home/genius/Zing/threadpool.cpp">

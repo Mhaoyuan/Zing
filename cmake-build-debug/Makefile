@@ -258,6 +258,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+rio.o: rio.cpp.o
+
+.PHONY : rio.o
+
+# target to build an object file
+rio.cpp.o:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/rio.cpp.o
+.PHONY : rio.cpp.o
+
+rio.i: rio.cpp.i
+
+.PHONY : rio.i
+
+# target to preprocess a source file
+rio.cpp.i:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/rio.cpp.i
+.PHONY : rio.cpp.i
+
+rio.s: rio.cpp.s
+
+.PHONY : rio.s
+
+# target to generate assembly for a file
+rio.cpp.s:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/rio.cpp.s
+.PHONY : rio.cpp.s
+
 threadpool.o: threadpool.cpp.o
 
 .PHONY : threadpool.o
@@ -336,6 +363,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... rio.o"
+	@echo "... rio.i"
+	@echo "... rio.s"
 	@echo "... threadpool.o"
 	@echo "... threadpool.i"
 	@echo "... threadpool.s"

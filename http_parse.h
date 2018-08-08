@@ -14,5 +14,4 @@ int z_http_parse_request_line (z_http_request_t *request);
 // http请求体解析
 int z_http_parse_request_body(z_http_request_t *request);
 
-
 #endif //ZING_HTTP_PARSE_H_H

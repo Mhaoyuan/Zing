@@ -92,4 +92,12 @@ typedef struct z_http_header_handle{
 extern z_http_header_handle_t z_http_headers_in[];
 
 
+int z_init_request_t(z_http_request_t *request ,int fd ,int epoll_fd, char* path);
+void z_http_handle_header(z_http_request_t* request, z_http_out_t* out);
+const char* get_shoring_from_status_code(int status_code);
+int z_http_close_conn(z_http_request_t* request);
+int z_init_out(z_http_out_t *out,int fd);
+
+
+
 #endif //ZING_HTTP_REQUEST_H
