@@ -90,6 +90,27 @@
 		<Unit filename="/home/genius/Zing/epoll.h">
 			<Option target="Zing"/>
 		</Unit>
+		<Unit filename="/home/genius/Zing/http.cpp">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/http.h">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/http_parse.cpp">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/http_parse.h">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/http_request.cpp">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/http_request.h">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/list.h">
+			<Option target="Zing"/>
+		</Unit>
 		<Unit filename="/home/genius/Zing/main.cpp">
 			<Option target="Zing"/>
 		</Unit>

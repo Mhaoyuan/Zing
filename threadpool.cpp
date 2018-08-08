@@ -158,7 +158,7 @@ int threadpool_add(z_threadpool_t* pool, void(*func)(void*), void *arg){
     pool->head->next = task;
     pool->queue_size++;
 
-    re = pthread_cond_signal(&(pool->cond));
+    re = pthread_cond_signal(&(pool->cond));   //线程有空闲的时候， 激活threadpool 函数
     if(pthread_mutex_unlock(&(pool->lock))!=0)
     {
         err = z_tp_lock_fail;

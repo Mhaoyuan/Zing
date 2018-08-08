@@ -150,6 +150,87 @@ epoll.cpp.s:
 	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/epoll.cpp.s
 .PHONY : epoll.cpp.s
 
+http.o: http.cpp.o
+
+.PHONY : http.o
+
+# target to build an object file
+http.cpp.o:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http.cpp.o
+.PHONY : http.cpp.o
+
+http.i: http.cpp.i
+
+.PHONY : http.i
+
+# target to preprocess a source file
+http.cpp.i:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http.cpp.i
+.PHONY : http.cpp.i
+
+http.s: http.cpp.s
+
+.PHONY : http.s
+
+# target to generate assembly for a file
+http.cpp.s:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http.cpp.s
+.PHONY : http.cpp.s
+
+http_parse.o: http_parse.cpp.o
+
+.PHONY : http_parse.o
+
+# target to build an object file
+http_parse.cpp.o:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http_parse.cpp.o
+.PHONY : http_parse.cpp.o
+
+http_parse.i: http_parse.cpp.i
+
+.PHONY : http_parse.i
+
+# target to preprocess a source file
+http_parse.cpp.i:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http_parse.cpp.i
+.PHONY : http_parse.cpp.i
+
+http_parse.s: http_parse.cpp.s
+
+.PHONY : http_parse.s
+
+# target to generate assembly for a file
+http_parse.cpp.s:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http_parse.cpp.s
+.PHONY : http_parse.cpp.s
+
+http_request.o: http_request.cpp.o
+
+.PHONY : http_request.o
+
+# target to build an object file
+http_request.cpp.o:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http_request.cpp.o
+.PHONY : http_request.cpp.o
+
+http_request.i: http_request.cpp.i
+
+.PHONY : http_request.i
+
+# target to preprocess a source file
+http_request.cpp.i:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http_request.cpp.i
+.PHONY : http_request.cpp.i
+
+http_request.s: http_request.cpp.s
+
+.PHONY : http_request.s
+
+# target to generate assembly for a file
+http_request.cpp.s:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http_request.cpp.s
+.PHONY : http_request.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -243,6 +324,15 @@ help:
 	@echo "... epoll.o"
 	@echo "... epoll.i"
 	@echo "... epoll.s"
+	@echo "... http.o"
+	@echo "... http.i"
+	@echo "... http.s"
+	@echo "... http_parse.o"
+	@echo "... http_parse.i"
+	@echo "... http_parse.s"
+	@echo "... http_request.o"
+	@echo "... http_request.i"
+	@echo "... http_request.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

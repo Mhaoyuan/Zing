@@ -3,6 +3,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/Zing.dir/util.cpp.o"
   "CMakeFiles/Zing.dir/epoll.cpp.o"
   "CMakeFiles/Zing.dir/threadpool.cpp.o"
+  "CMakeFiles/Zing.dir/http_request.cpp.o"
+  "CMakeFiles/Zing.dir/http.cpp.o"
+  "CMakeFiles/Zing.dir/http_parse.cpp.o"
   "Zing.pdb"
   "Zing"
 )

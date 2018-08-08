@@ -153,12 +153,87 @@ CMakeFiles/Zing.dir/threadpool.cpp.o.provides: CMakeFiles/Zing.dir/threadpool.cp
 CMakeFiles/Zing.dir/threadpool.cpp.o.provides.build: CMakeFiles/Zing.dir/threadpool.cpp.o
 
 
+CMakeFiles/Zing.dir/http_request.cpp.o: CMakeFiles/Zing.dir/flags.make
+CMakeFiles/Zing.dir/http_request.cpp.o: ../http_request.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/genius/Zing/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Zing.dir/http_request.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Zing.dir/http_request.cpp.o -c /home/genius/Zing/http_request.cpp
+
+CMakeFiles/Zing.dir/http_request.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Zing.dir/http_request.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/genius/Zing/http_request.cpp > CMakeFiles/Zing.dir/http_request.cpp.i
+
+CMakeFiles/Zing.dir/http_request.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Zing.dir/http_request.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/genius/Zing/http_request.cpp -o CMakeFiles/Zing.dir/http_request.cpp.s
+
+CMakeFiles/Zing.dir/http_request.cpp.o.requires:
+
+.PHONY : CMakeFiles/Zing.dir/http_request.cpp.o.requires
+
+CMakeFiles/Zing.dir/http_request.cpp.o.provides: CMakeFiles/Zing.dir/http_request.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http_request.cpp.o.provides.build
+.PHONY : CMakeFiles/Zing.dir/http_request.cpp.o.provides
+
+CMakeFiles/Zing.dir/http_request.cpp.o.provides.build: CMakeFiles/Zing.dir/http_request.cpp.o
+
+
+CMakeFiles/Zing.dir/http.cpp.o: CMakeFiles/Zing.dir/flags.make
+CMakeFiles/Zing.dir/http.cpp.o: ../http.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/genius/Zing/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Zing.dir/http.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Zing.dir/http.cpp.o -c /home/genius/Zing/http.cpp
+
+CMakeFiles/Zing.dir/http.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Zing.dir/http.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/genius/Zing/http.cpp > CMakeFiles/Zing.dir/http.cpp.i
+
+CMakeFiles/Zing.dir/http.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Zing.dir/http.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/genius/Zing/http.cpp -o CMakeFiles/Zing.dir/http.cpp.s
+
+CMakeFiles/Zing.dir/http.cpp.o.requires:
+
+.PHONY : CMakeFiles/Zing.dir/http.cpp.o.requires
+
+CMakeFiles/Zing.dir/http.cpp.o.provides: CMakeFiles/Zing.dir/http.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http.cpp.o.provides.build
+.PHONY : CMakeFiles/Zing.dir/http.cpp.o.provides
+
+CMakeFiles/Zing.dir/http.cpp.o.provides.build: CMakeFiles/Zing.dir/http.cpp.o
+
+
+CMakeFiles/Zing.dir/http_parse.cpp.o: CMakeFiles/Zing.dir/flags.make
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../http_parse.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/genius/Zing/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Zing.dir/http_parse.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Zing.dir/http_parse.cpp.o -c /home/genius/Zing/http_parse.cpp
+
+CMakeFiles/Zing.dir/http_parse.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Zing.dir/http_parse.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/genius/Zing/http_parse.cpp > CMakeFiles/Zing.dir/http_parse.cpp.i
+
+CMakeFiles/Zing.dir/http_parse.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Zing.dir/http_parse.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/genius/Zing/http_parse.cpp -o CMakeFiles/Zing.dir/http_parse.cpp.s
+
+CMakeFiles/Zing.dir/http_parse.cpp.o.requires:
+
+.PHONY : CMakeFiles/Zing.dir/http_parse.cpp.o.requires
+
+CMakeFiles/Zing.dir/http_parse.cpp.o.provides: CMakeFiles/Zing.dir/http_parse.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/http_parse.cpp.o.provides.build
+.PHONY : CMakeFiles/Zing.dir/http_parse.cpp.o.provides
+
+CMakeFiles/Zing.dir/http_parse.cpp.o.provides.build: CMakeFiles/Zing.dir/http_parse.cpp.o
+
+
 # Object files for target Zing
 Zing_OBJECTS = \
 "CMakeFiles/Zing.dir/main.cpp.o" \
 "CMakeFiles/Zing.dir/util.cpp.o" \
 "CMakeFiles/Zing.dir/epoll.cpp.o" \
-"CMakeFiles/Zing.dir/threadpool.cpp.o"
+"CMakeFiles/Zing.dir/threadpool.cpp.o" \
+"CMakeFiles/Zing.dir/http_request.cpp.o" \
+"CMakeFiles/Zing.dir/http.cpp.o" \
+"CMakeFiles/Zing.dir/http_parse.cpp.o"
 
 # External object files for target Zing
 Zing_EXTERNAL_OBJECTS =
@@ -167,9 +242,12 @@ Zing: CMakeFiles/Zing.dir/main.cpp.o
 Zing: CMakeFiles/Zing.dir/util.cpp.o
 Zing: CMakeFiles/Zing.dir/epoll.cpp.o
 Zing: CMakeFiles/Zing.dir/threadpool.cpp.o
+Zing: CMakeFiles/Zing.dir/http_request.cpp.o
+Zing: CMakeFiles/Zing.dir/http.cpp.o
+Zing: CMakeFiles/Zing.dir/http_parse.cpp.o
 Zing: CMakeFiles/Zing.dir/build.make
 Zing: CMakeFiles/Zing.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/genius/Zing/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Zing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/genius/Zing/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable Zing"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Zing.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -181,6 +259,9 @@ CMakeFiles/Zing.dir/requires: CMakeFiles/Zing.dir/main.cpp.o.requires
 CMakeFiles/Zing.dir/requires: CMakeFiles/Zing.dir/util.cpp.o.requires
 CMakeFiles/Zing.dir/requires: CMakeFiles/Zing.dir/epoll.cpp.o.requires
 CMakeFiles/Zing.dir/requires: CMakeFiles/Zing.dir/threadpool.cpp.o.requires
+CMakeFiles/Zing.dir/requires: CMakeFiles/Zing.dir/http_request.cpp.o.requires
+CMakeFiles/Zing.dir/requires: CMakeFiles/Zing.dir/http.cpp.o.requires
+CMakeFiles/Zing.dir/requires: CMakeFiles/Zing.dir/http_parse.cpp.o.requires
 
 .PHONY : CMakeFiles/Zing.dir/requires
 
