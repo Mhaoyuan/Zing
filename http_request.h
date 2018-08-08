@@ -82,5 +82,14 @@ typedef  struct z_http_header{
 
 }z_http_header_t;
 
+typedef int (*z_http_header_handle_pt)(z_http_request_t* request, z_http_out_t* out, char* data, int len);
+
+typedef struct z_http_header_handle{
+    char* name;
+    z_http_header_handle_pt handler;
+}z_http_header_handle_t;
+
+extern z_http_header_handle_t z_http_headers_in[];
+
 
 #endif //ZING_HTTP_REQUEST_H
