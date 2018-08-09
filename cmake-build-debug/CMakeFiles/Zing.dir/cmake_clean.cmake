@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Zing.dir/http.cpp.o"
   "CMakeFiles/Zing.dir/http_parse.cpp.o"
   "CMakeFiles/Zing.dir/rio.cpp.o"
+  "CMakeFiles/Zing.dir/priority_queue.cpp.o"
+  "CMakeFiles/Zing.dir/test_unit/priority_queue_test.cpp.o"
   "Zing.pdb"
   "Zing"
 )

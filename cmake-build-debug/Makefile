@@ -258,6 +258,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+priority_queue.o: priority_queue.cpp.o
+
+.PHONY : priority_queue.o
+
+# target to build an object file
+priority_queue.cpp.o:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/priority_queue.cpp.o
+.PHONY : priority_queue.cpp.o
+
+priority_queue.i: priority_queue.cpp.i
+
+.PHONY : priority_queue.i
+
+# target to preprocess a source file
+priority_queue.cpp.i:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/priority_queue.cpp.i
+.PHONY : priority_queue.cpp.i
+
+priority_queue.s: priority_queue.cpp.s
+
+.PHONY : priority_queue.s
+
+# target to generate assembly for a file
+priority_queue.cpp.s:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/priority_queue.cpp.s
+.PHONY : priority_queue.cpp.s
+
 rio.o: rio.cpp.o
 
 .PHONY : rio.o
@@ -284,6 +311,33 @@ rio.s: rio.cpp.s
 rio.cpp.s:
 	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/rio.cpp.s
 .PHONY : rio.cpp.s
+
+test_unit/priority_queue_test.o: test_unit/priority_queue_test.cpp.o
+
+.PHONY : test_unit/priority_queue_test.o
+
+# target to build an object file
+test_unit/priority_queue_test.cpp.o:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/test_unit/priority_queue_test.cpp.o
+.PHONY : test_unit/priority_queue_test.cpp.o
+
+test_unit/priority_queue_test.i: test_unit/priority_queue_test.cpp.i
+
+.PHONY : test_unit/priority_queue_test.i
+
+# target to preprocess a source file
+test_unit/priority_queue_test.cpp.i:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/test_unit/priority_queue_test.cpp.i
+.PHONY : test_unit/priority_queue_test.cpp.i
+
+test_unit/priority_queue_test.s: test_unit/priority_queue_test.cpp.s
+
+.PHONY : test_unit/priority_queue_test.s
+
+# target to generate assembly for a file
+test_unit/priority_queue_test.cpp.s:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/test_unit/priority_queue_test.cpp.s
+.PHONY : test_unit/priority_queue_test.cpp.s
 
 threadpool.o: threadpool.cpp.o
 
@@ -363,9 +417,15 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... priority_queue.o"
+	@echo "... priority_queue.i"
+	@echo "... priority_queue.s"
 	@echo "... rio.o"
 	@echo "... rio.i"
 	@echo "... rio.s"
+	@echo "... test_unit/priority_queue_test.o"
+	@echo "... test_unit/priority_queue_test.i"
+	@echo "... test_unit/priority_queue_test.s"
 	@echo "... threadpool.o"
 	@echo "... threadpool.i"
 	@echo "... threadpool.s"

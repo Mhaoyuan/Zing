@@ -117,10 +117,19 @@
 		<Unit filename="/home/genius/Zing/main.cpp">
 			<Option target="Zing"/>
 		</Unit>
+		<Unit filename="/home/genius/Zing/priority_queue.cpp">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/priority_queue.h">
+			<Option target="Zing"/>
+		</Unit>
 		<Unit filename="/home/genius/Zing/rio.cpp">
 			<Option target="Zing"/>
 		</Unit>
 		<Unit filename="/home/genius/Zing/rio.h">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/test_unit/priority_queue_test.cpp">
 			<Option target="Zing"/>
 		</Unit>
 		<Unit filename="/home/genius/Zing/threadpool.cpp">
