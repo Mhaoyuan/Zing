@@ -61,7 +61,7 @@ typedef struct z_http_request{
     void* cur_header_key_end;
     void* cur_header_value_start;
     void* cur_header_value_end;
-    void* time;
+    void* timer;
 }z_http_request_t;
 
 typedef struct z_http_out{       //响应
