@@ -79,7 +79,7 @@ void z_handle_expire_timers(){
     }
 }
 
-void z_pq_add_timer(z_http_request_t *request, size_t timeout, time_handler_pt handler){
+void z_add_timer(z_http_request_t *request, size_t timeout, time_handler_pt handler){
     z_time_update();
     //申请新的z_timer_t 结点， 并加入到z_http_request_timer下
     z_timer_t* timer_node = (z_timer_t*)malloc(sizeof(z_timer_t));

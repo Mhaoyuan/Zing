@@ -9,6 +9,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Zing.dir/rio.cpp.o"
   "CMakeFiles/Zing.dir/priority_queue.cpp.o"
   "CMakeFiles/Zing.dir/test_unit/priority_queue_test.cpp.o"
+  "CMakeFiles/Zing.dir/timer.cpp.o"
   "Zing.pdb"
   "Zing"
 )

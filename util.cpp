@@ -13,13 +13,17 @@
 #include <signal.h>
 #include <unistd.h>
 #include "util.h"
+#include "http_request.h"
+#include "epoll.h"
 //#include "util.h"
 
 
 int read_conf(char* filename,Z_conf_t* conf ){
     FILE* fp = fopen(filename, "r");
-    if(!fp)
+    if(!fp) {
+        perror("fopen");
         return Z_CONF_ERROE;
+    }
     char buff[BUFIEN];
     int buff_len = BUFIEN;
     char* curr_pos = buff;
@@ -32,8 +36,8 @@ int read_conf(char* filename,Z_conf_t* conf ){
         delim_pos = strstr(curr_pos, DELIM);
         if(!delim_pos)
             return Z_CONF_ERROE;
-        if(curr_pos[strlen(curr_pos)-1] == 'n'){
-            curr_pos[strlen(curr_pos) -1] = '0';
+        if(curr_pos[strlen(curr_pos)-1] == '\n'){
+            curr_pos[strlen(curr_pos) -1] = '\0';
         }
         //get root
         if(strncmp("root", curr_pos,4)==0){
@@ -48,7 +52,7 @@ int read_conf(char* filename,Z_conf_t* conf ){
             conf->port = atoi(delim_pos+1);
         }
         if(strncmp("thread_num", curr_pos,9)==0) {
-            conf->port = atoi(delim_pos+1);
+            conf->thread_num = atoi(delim_pos+1);
         }
 
         line_len = strlen(curr_pos);
@@ -62,13 +66,13 @@ int socket_bind_listen(int port){
     port = ((port<=1024)||(port >= 65535)? 6666: port);
 
     int listen_fd = 0;
-    if(listen_fd = socket(AF_INET, SOCK_STREAM, 0)==-1)
+    if((listen_fd = socket(AF_INET, SOCK_STREAM, 0))==-1)
     {
         perror("socket:");
         return -1;
     }
     int optval = 1;
-    if(setsockopt(listen_fd, SOL_SOCKET,SO_REUSEADDR ,(const void*)optval, sizeof(int)) == -1){
+    if(setsockopt(listen_fd, SOL_SOCKET,SO_REUSEADDR ,(const void*)&optval, sizeof(int)) == -1){
         perror("setsockopt:");
         return -2;
     }
@@ -108,6 +112,24 @@ void accept_connection(int listen_fd, int epoll_fd, char* path){
     if(accept_fd==-1) {
         perror("accpt:");
     }
+    //设置为非阻塞方式
+//    int rc = make_socket_non_blocking(accept_fd);
+    // 申请z_http_request_t 类型的结点并初始化
+    z_http_request_t* request = (z_http_request_t*)malloc(sizeof(z_http_request_t));
+    z_init_request_t(request, accept_fd, epoll_fd,path);
 
-    int rc = make_socket_non_blocking(accept_fd);
+    //文件描述符可读,边缘触发,保证一个socket连接在任意时刻之被一个线程处理
+    z_epoll_add(epoll_fd, accept_fd,request, (EPOLLIN| EPOLLET | EPOLLONESHOT));
+    z_add_timer(request, TIMEOUT_DEFAULT, z_http_close_conn);
+
+
+}
+
+void handle_for_sigpipe(){
+    struct sigaction sa;
+    memset(&sa, '\0', sizeof(sa));
+    sa.sa_handler = SIG_IGN;
+    sa.sa_flags = 0;
+    if(sigaction(SIGPIPE, &sa, NULL))
+        return;
 }

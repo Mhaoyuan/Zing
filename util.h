@@ -22,6 +22,8 @@ typedef struct  Z_conf{
 
 int read_conf(char* filename,Z_conf_t* conf );
 int socket_bind_listen(int port);
-
+int make_socket_non_blocking(int fd);
+void accept_connection(int listen_fd, int epoll_fd, char* path);
+void handle_for_sigpipe();
 #endif //ZING_UTIL_H
 

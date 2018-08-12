@@ -32,7 +32,7 @@ static int z_http_process_connection(z_http_request_t* request, z_http_out_t* ou
     return 0;
 }
 
-static int z_http_process_if_modified_since(z_http_request_t* request,z_http_out_t* out, char* data, int len{
+static int z_http_process_if_modified_since(z_http_request_t* request,z_http_out_t* out, char* data, int len){
     (void) request;
     (void) len;
     struct tm tm;
@@ -46,7 +46,7 @@ static int z_http_process_if_modified_since(z_http_request_t* request,z_http_out
     double  time_diff = difftime(out->mtime, client_time);
 
     // 微妙时间内为修改status显示未修改， modify字段设置为1
-    if(fabs(time_diff)< le-6){
+    if(fabs(time_diff)< 1e-6){
         out->modified = 0;
         out->status = Z_HTTP_NOT_MODIFID;
     }
@@ -69,7 +69,7 @@ int z_init_out(z_http_out_t *out,int fd){
     out->fd = fd;
     out-> keep_alive = 1; //默认为1 连接不断开
     out->modified = 1;
-    out->status = 300;
+    out->status = 200;
 }
 
 //取出request->list 中的头信息 根就头信息执行不同的函数 对out 内容进行修改
@@ -81,9 +81,9 @@ void z_http_handle_header(z_http_request_t* request, z_http_out_t* out){
     list_for_each(pos,&(request->list)){
         hd = list_entry(pos,z_http_header_t,list);
         for(header_in = z_http_headers_in; strlen(header_in->name) > 0; header_in++){
-            if(strncmp((char*)hd->key_start,header_in->name, hd->key_end - hd->key_start)==0)
+            if(strncmp((char*)hd->key_start,header_in->name, (char*)hd->key_end - (char*)hd->key_start)==0)
             {
-                len = hd->value_end - hd->value_start;
+                len = (char*)hd->value_end - (char*)hd->value_start;
                 (*(header_in->handler))(request, out, (char*)hd->value_start,len);
             }
         }

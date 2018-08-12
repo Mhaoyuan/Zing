@@ -3,14 +3,85 @@
 
 CMakeFiles/Zing.dir/epoll.cpp.o: ../epoll.cpp
 CMakeFiles/Zing.dir/epoll.cpp.o: ../epoll.h
+CMakeFiles/Zing.dir/epoll.cpp.o: ../http.h
+CMakeFiles/Zing.dir/epoll.cpp.o: ../http_parse.h
+CMakeFiles/Zing.dir/epoll.cpp.o: ../http_request.h
+CMakeFiles/Zing.dir/epoll.cpp.o: ../list.h
+CMakeFiles/Zing.dir/epoll.cpp.o: ../priority_queue.h
+CMakeFiles/Zing.dir/epoll.cpp.o: ../rio.h
+CMakeFiles/Zing.dir/epoll.cpp.o: ../threadpool.h
+CMakeFiles/Zing.dir/epoll.cpp.o: ../timer.h
+CMakeFiles/Zing.dir/epoll.cpp.o: ../util.h
 
+CMakeFiles/Zing.dir/http.cpp.o: ../epoll.h
+CMakeFiles/Zing.dir/http.cpp.o: ../http.cpp
+CMakeFiles/Zing.dir/http.cpp.o: ../http.h
+CMakeFiles/Zing.dir/http.cpp.o: ../http_parse.h
+CMakeFiles/Zing.dir/http.cpp.o: ../http_request.h
+CMakeFiles/Zing.dir/http.cpp.o: ../list.h
+CMakeFiles/Zing.dir/http.cpp.o: ../priority_queue.h
+CMakeFiles/Zing.dir/http.cpp.o: ../rio.h
+CMakeFiles/Zing.dir/http.cpp.o: ../threadpool.h
+CMakeFiles/Zing.dir/http.cpp.o: ../timer.h
+CMakeFiles/Zing.dir/http.cpp.o: ../util.h
+
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../epoll.h
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../http.h
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../http_parse.cpp
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../http_parse.h
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../http_request.h
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../list.h
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../priority_queue.h
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../rio.h
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../threadpool.h
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../timer.h
+CMakeFiles/Zing.dir/http_parse.cpp.o: ../util.h
+
+CMakeFiles/Zing.dir/http_request.cpp.o: ../http_request.cpp
+CMakeFiles/Zing.dir/http_request.cpp.o: ../http_request.h
+CMakeFiles/Zing.dir/http_request.cpp.o: ../list.h
+CMakeFiles/Zing.dir/http_request.cpp.o: ../util.h
+
+CMakeFiles/Zing.dir/main.cpp.o: ../epoll.h
+CMakeFiles/Zing.dir/main.cpp.o: ../http.h
+CMakeFiles/Zing.dir/main.cpp.o: ../http_parse.h
+CMakeFiles/Zing.dir/main.cpp.o: ../http_request.h
+CMakeFiles/Zing.dir/main.cpp.o: ../list.h
 CMakeFiles/Zing.dir/main.cpp.o: ../main.cpp
+CMakeFiles/Zing.dir/main.cpp.o: ../priority_queue.h
+CMakeFiles/Zing.dir/main.cpp.o: ../rio.h
 CMakeFiles/Zing.dir/main.cpp.o: ../threadpool.h
+CMakeFiles/Zing.dir/main.cpp.o: ../timer.h
 CMakeFiles/Zing.dir/main.cpp.o: ../util.h
+
+CMakeFiles/Zing.dir/priority_queue.cpp.o: ../priority_queue.cpp
+CMakeFiles/Zing.dir/priority_queue.cpp.o: ../priority_queue.h
+
+CMakeFiles/Zing.dir/rio.cpp.o: ../rio.cpp
+CMakeFiles/Zing.dir/rio.cpp.o: ../rio.h
+
+CMakeFiles/Zing.dir/test_unit/priority_queue_test.cpp.o: ../test_unit/priority_queue.h
+CMakeFiles/Zing.dir/test_unit/priority_queue_test.cpp.o: ../test_unit/priority_queue_test.cpp
 
 CMakeFiles/Zing.dir/threadpool.cpp.o: ../threadpool.cpp
 CMakeFiles/Zing.dir/threadpool.cpp.o: ../threadpool.h
 
+CMakeFiles/Zing.dir/timer.cpp.o: ../http_request.h
+CMakeFiles/Zing.dir/timer.cpp.o: ../list.h
+CMakeFiles/Zing.dir/timer.cpp.o: ../priority_queue.h
+CMakeFiles/Zing.dir/timer.cpp.o: ../timer.cpp
+CMakeFiles/Zing.dir/timer.cpp.o: ../timer.h
+CMakeFiles/Zing.dir/timer.cpp.o: ../util.h
+
+CMakeFiles/Zing.dir/util.cpp.o: ../epoll.h
+CMakeFiles/Zing.dir/util.cpp.o: ../http.h
+CMakeFiles/Zing.dir/util.cpp.o: ../http_parse.h
+CMakeFiles/Zing.dir/util.cpp.o: ../http_request.h
+CMakeFiles/Zing.dir/util.cpp.o: ../list.h
+CMakeFiles/Zing.dir/util.cpp.o: ../priority_queue.h
+CMakeFiles/Zing.dir/util.cpp.o: ../rio.h
+CMakeFiles/Zing.dir/util.cpp.o: ../threadpool.h
+CMakeFiles/Zing.dir/util.cpp.o: ../timer.h
 CMakeFiles/Zing.dir/util.cpp.o: ../util.cpp
 CMakeFiles/Zing.dir/util.cpp.o: ../util.h
 

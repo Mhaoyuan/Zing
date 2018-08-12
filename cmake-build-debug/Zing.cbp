@@ -138,6 +138,12 @@
 		<Unit filename="/home/genius/Zing/threadpool.h">
 			<Option target="Zing"/>
 		</Unit>
+		<Unit filename="/home/genius/Zing/timer.cpp">
+			<Option target="Zing"/>
+		</Unit>
+		<Unit filename="/home/genius/Zing/timer.h">
+			<Option target="Zing"/>
+		</Unit>
 		<Unit filename="/home/genius/Zing/util.cpp">
 			<Option target="Zing"/>
 		</Unit>

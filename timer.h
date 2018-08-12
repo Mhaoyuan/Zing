@@ -24,6 +24,13 @@ typedef struct z_timer{
 extern z_pq_t z_timer;
 extern size_t z_current_mesc;
 
+int z_timer_init();
+int z_find_timer();
+void z_handle_expire_timers();
+void z_add_timer(z_http_request_t* request, size_t timeout, time_handler_pt handler);
+void z_del_timer(z_http_request_t* request);
+int timer_comp(void *ti, void *tj);
+
 
 
 

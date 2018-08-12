@@ -4,6 +4,7 @@
 
 #include "threadpool.h"
 #include <pthread.h>
+#include <stdio.h>
 //释放线程池
 static int threadpool_free(z_threadpool_t* pool) {
     if(pool == NULL|| pool->started > 0)  //判断线程池是否已经释放过,或者还有正在运行的任务
@@ -30,7 +31,7 @@ static void* threadpool_worker(void *arg)
         pthread_mutex_lock(&(pool->lock));                 //加互斥莎
         while((pool->queue_size == 0) && !(pool->shutdown))
             pthread_cond_wait(&(pool->cond),&(pool->lock));   // 当任务队列为空， 并且线程池没有关机 ，等待条件变量解锁
-
+        printf("a");
         if(pool->shutdown == immediate_shutdown)
             break;
         else if ((pool->shutdown == graceful_shutdown)&&(pool->queue_size==0))
@@ -41,11 +42,11 @@ static void* threadpool_worker(void *arg)
             pthread_mutex_unlock(&(pool->lock));
             continue;
         }
-        pool->head = pool->head->next;              //摘掉head链表被取出的任务
+        pool->head->next = task->next;              //摘掉head链表被取出的任务
 
         pool->queue_size--;
         pthread_mutex_unlock(&(pool->lock));
-
+        printf("a");
         (*(task->fun))(task->arg);
         free(task);
     }
@@ -130,6 +131,8 @@ z_threadpool_t * threadpool_init(int thread_num){
        pool->started++;
    }
    return pool;
+
+
    err:if(pool)
         threadpool_free(pool);
     return NULL;
@@ -137,33 +140,38 @@ z_threadpool_t * threadpool_init(int thread_num){
 }
 
 
-int threadpool_add(z_threadpool_t* pool, void(*func)(void*), void *arg){
-    int re, err = 0;
-    if(pool ==NULL || func ==NULL)
+
+int threadpool_add(z_threadpool_t* pool, void (*func)(void *), void *arg){
+    int rc, err = 0;
+    if(pool == NULL || func == NULL)
         return -1;
-    if(pthread_mutex_lock(&(pool->lock))!= 0){
+
+    if(pthread_mutex_lock(&(pool->lock)) != 0)
         return -1;
-    }
+
+    z_task_t *task = (z_task_t *)malloc(sizeof(z_task_t));
+    // 已设置关机
     if(pool->shutdown){
         err = z_tp_already_shutdown;
-        return err;
+        goto out;
     }
 
-    z_task_t* task = (z_task_t*)malloc(sizeof(z_task_t));
-    if(task ==NULL)
-        return err;
-    task -> fun = func;
-    task -> arg = arg;
+    // 新建task并注册信息
+
+    if(task == NULL)
+        goto out;
+    task->fun = func;
+    task->arg = arg;
+
+    // 新task节点在head处插入
     task->next = pool->head->next;
     pool->head->next = task;
     pool->queue_size++;
 
-    re = pthread_cond_signal(&(pool->cond));   //线程有空闲的时候， 激活threadpool 函数
-    if(pthread_mutex_unlock(&(pool->lock))!=0)
-    {
-        err = z_tp_lock_fail;
-        return err;
-    }
+    rc = pthread_cond_signal(&(pool->cond));
 
-
+    out:
+    if(pthread_mutex_unlock(&pool->lock) != 0)
+        return -1;
+    return err;
 }

@@ -5,90 +5,91 @@
 #include "http.h"
 
 /* POST /XXX/XXX HTTP/1.1 */
-int z_http_parse_request_line(z_http_request_t* request) {
-    enum {
-        sw_start = 0,            //初始状态
-        sw_method,               //解析请求方法
-        sw_spaces_before_uri,    //解析URL前可能存在的多余空格
-        sw_after_slash_in_uri,   //解析URL路径中/后的内容
-        sw_http,                 //解析HTTP
+int z_http_parse_request_line(z_http_request_t *request){
+    enum State{
+        sw_start = 0,
+        sw_method,
+        sw_spaces_before_uri,
+        sw_after_slash_in_uri,
+        sw_http,
         sw_http_H,
         sw_http_HT,
         sw_http_HTT,
         sw_http_HTTP,
-        sw_first_major_digit,    //解析协议版本的主版本号的第一个数字
-        sw_major_digit,          //解析协议版本的主版本号第一个数字后的数字或者.
-        sw_first_minor_digit,    // 解析协议版本的次版本号的第一个数字
-        sw_minor_digit,          // 解析协议版本的次版本号第一个数字后的数字
-        sw_spaces_after_digit,   //解析空格后的第一个数字
-        sw_almost_done           // 解析结束的\n
-    } state;
-    state = request->state;
+        sw_first_major_digit,
+        sw_major_digit,
+        sw_first_minor_digit,
+        sw_minor_digit,
+        sw_spaces_after_digit,
+        sw_almost_done
+    }state;
+    state = State (request->state);
 
     u_char ch, *p, *m;
     size_t pi;
-
-    for (pi = request->pos; pi < request->last; pi++) {
-        p = (u_char *) &request->buff[pi % MAX_BUF];            //循环buff
+    for(pi = request->pos; pi < request->last; pi++){
+        p = (u_char *)&request->buff[pi % MAX_BUF];
         ch = *p;
 
-        switch (state) {
-            /* HTTP methods: GET, HEAD, POST */
+        switch(state){
             case sw_start:
                 request->request_start = p;
-                if (ch == CR || ch == LF)                         //如果当前字符为\r 或者 \n 跳出
+                if(ch == CR || ch == LF)
                     break;
-                if ((ch < 'A' || ch > 'Z') && ch != '_')           //如果当前字母不是大写 返回请求方法无效
+                if((ch < 'A' || ch > 'Z') && ch != '_')
                     return Z_HTTP_PARSE_INVALID_METHOD;
-
                 state = sw_method;
                 break;
 
             case sw_method:
-                if (ch == ' ') {
-                    request->method_end = p;                //遇到空格 读到了method结尾
-                    m = (u_char *) (request->request_start);
-                    switch (p - m) {
+                if(ch == ' '){
+                    request->method_end = p;
+                    m = (u_char*)request->request_start;
+                    switch(p - m){
                         case 3:
-                            if (z_str3_cmp(m, 'G', 'E', 'T', ' ')) {
+                            if(z_str3_cmp(m, 'G', 'E', 'T', ' ')){
                                 request->method = Z_HTTP_GET;
                                 break;
                             }
+                            break;
                         case 4:
-                            if (z_str3Ocmp(m, 'P', 'O', 'S', 'T')) {
+                            if(z_str3Ocmp(m, 'P', 'O', 'S', 'T')){
                                 request->method = Z_HTTP_POST;
                                 break;
                             }
-                            if (z_str4cmp(m, 'H', 'E', 'A', 'D')) {
+                            if(z_str4cmp(m, 'H', 'E', 'A', 'D')){
                                 request->method = Z_HTTP_HEAD;
                                 break;
                             }
+                            break;
                         default:
-                            request->method = Z_HTTP_HEAD;
+                            request->method = Z_HTTP_UNKNOWN;
                             break;
                     }
                     state = sw_spaces_before_uri;
                     break;
                 }
-                if ((ch < 'A' || ch > 'Z') && ch != '_')
+
+                if((ch < 'A' || ch > 'Z') && ch != '_')
                     return Z_HTTP_PARSE_INVALID_METHOD;
                 break;
 
-            case sw_spaces_before_uri:                  //解析uri， 过滤  ‘ ’
-                if (ch == '/') {
+            case sw_spaces_before_uri:
+                if(ch == '/'){
                     request->uri_start = p + 1;
                     state = sw_after_slash_in_uri;
                     break;
                 }
-                switch (ch) {
+                switch(ch){
                     case ' ':
                         break;
                     default:
                         return Z_HTTP_PARSE_INVALID_REQUEST;
                 }
                 break;
+
             case sw_after_slash_in_uri:
-                switch (ch) {
+                switch(ch){
                     case ' ':
                         request->uri_end = p;
                         state = sw_http;
@@ -99,19 +100,19 @@ int z_http_parse_request_line(z_http_request_t* request) {
                 break;
 
             case sw_http:
-                switch (ch) {
+                switch(ch){
                     case ' ':
                         break;
                     case 'H':
                         state = sw_http_H;
                         break;
                     default:
-                        Z_HTTP_PARSE_INVALID_REQUEST;
+                        return Z_HTTP_PARSE_INVALID_REQUEST;
                 }
                 break;
 
             case sw_http_H:
-                switch (ch) {
+                switch(ch){
                     case 'T':
                         state = sw_http_HT;
                         break;
@@ -119,26 +120,29 @@ int z_http_parse_request_line(z_http_request_t* request) {
                         return Z_HTTP_PARSE_INVALID_REQUEST;
                 }
                 break;
+
             case sw_http_HT:
-                switch (ch) {
+                switch(ch){
                     case 'T':
                         state = sw_http_HTT;
                         break;
                     default:
-                        Z_HTTP_PARSE_INVALID_REQUEST;
+                        return Z_HTTP_PARSE_INVALID_REQUEST;
                 }
                 break;
+
             case sw_http_HTT:
-                switch (ch) {
+                switch(ch){
                     case 'P':
                         state = sw_http_HTTP;
                         break;
                     default:
-                        Z_HTTP_PARSE_INVALID_REQUEST;
+                        return Z_HTTP_PARSE_INVALID_REQUEST;
                 }
                 break;
+
             case sw_http_HTTP:
-                switch (ch) {
+                switch(ch){
                     case '/':
                         state = sw_first_major_digit;
                         break;
@@ -146,29 +150,49 @@ int z_http_parse_request_line(z_http_request_t* request) {
                         return Z_HTTP_PARSE_INVALID_REQUEST;
                 }
                 break;
+
             case sw_first_major_digit:
-                if (ch < '1' || ch > '9')
+                if(ch < '1' || ch > '9')
                     return Z_HTTP_PARSE_INVALID_REQUEST;
                 request->http_major = ch - '0';
                 state = sw_major_digit;
                 break;
+
+            case sw_major_digit:
+                if(ch == '.'){
+                    state = sw_first_minor_digit;
+                    break;
+                }
+                if(ch < '0' || ch > '9')
+                    return Z_HTTP_PARSE_INVALID_REQUEST;
+                request->http_major = request->http_major * 10 + ch - '0';
+                break;
+
+            case sw_first_minor_digit:
+                if(ch < '0' || ch > '9')
+                    return Z_HTTP_PARSE_INVALID_REQUEST;
+                request->http_minor = ch - '0';
+                state = sw_minor_digit;
+                break;
+
             case sw_minor_digit:
-                if (ch == CR) {
+                if(ch == CR){
                     state = sw_almost_done;
                     break;
                 }
-                if (ch == LF)
+                if(ch == LF)
                     goto done;
-                if (ch == ' ') {
+                if(ch == ' '){
                     state = sw_spaces_after_digit;
                     break;
                 }
-                if (ch < '0' || ch > '9')
+                if(ch < '0' || ch > '9')
                     return Z_HTTP_PARSE_INVALID_REQUEST;
                 request->http_minor = request->http_minor * 10 + ch - '0';
                 break;
+
             case sw_spaces_after_digit:
-                switch (ch) {
+                switch(ch){
                     case ' ':
                         break;
                     case CR:
@@ -180,9 +204,10 @@ int z_http_parse_request_line(z_http_request_t* request) {
                         return Z_HTTP_PARSE_INVALID_REQUEST;
                 }
                 break;
+
             case sw_almost_done:
                 request->request_end = p - 1;
-                switch (ch) {
+                switch(ch){
                     case LF:
                         goto done;
                     default:
@@ -213,7 +238,7 @@ int z_http_parse_request_line(z_http_request_t* request) {
 
 int z_http_parse_request_body(z_http_request_t *request){
     // 状态列表
-    enum{
+    enum State{
         sw_start = 0,
         sw_key,
         sw_spaces_before_colon,
@@ -223,7 +248,7 @@ int z_http_parse_request_body(z_http_request_t *request){
         sw_crlf,
         sw_crlfcr
     }state;
-    state = request->state;
+    state = State(request->state);
 
     size_t pi;
     unsigned char ch, *p;

@@ -366,6 +366,33 @@ threadpool.cpp.s:
 	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/threadpool.cpp.s
 .PHONY : threadpool.cpp.s
 
+timer.o: timer.cpp.o
+
+.PHONY : timer.o
+
+# target to build an object file
+timer.cpp.o:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/timer.cpp.o
+.PHONY : timer.cpp.o
+
+timer.i: timer.cpp.i
+
+.PHONY : timer.i
+
+# target to preprocess a source file
+timer.cpp.i:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/timer.cpp.i
+.PHONY : timer.cpp.i
+
+timer.s: timer.cpp.s
+
+.PHONY : timer.s
+
+# target to generate assembly for a file
+timer.cpp.s:
+	$(MAKE) -f CMakeFiles/Zing.dir/build.make CMakeFiles/Zing.dir/timer.cpp.s
+.PHONY : timer.cpp.s
+
 util.o: util.cpp.o
 
 .PHONY : util.o
@@ -429,6 +456,9 @@ help:
 	@echo "... threadpool.o"
 	@echo "... threadpool.i"
 	@echo "... threadpool.s"
+	@echo "... timer.o"
+	@echo "... timer.i"
+	@echo "... timer.s"
 	@echo "... util.o"
 	@echo "... util.i"
 	@echo "... util.s"
