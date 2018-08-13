@@ -161,7 +161,7 @@ int error_process(struct stat* sbufptr, char* filename, int fd){
 void do_request(void* ptr){
     z_http_request_t* request = (z_http_request_t*)ptr;
     int fd= request->fd;
-    printf("asd");
+//    printf("asd");
     ROOT = request->root;
     char filename[SHORTLINE];
     struct stat sbuf;
@@ -179,7 +179,7 @@ void do_request(void* ptr){
         remain_size = MIN(MAX_BUF - (request->last - request->pos) - 1,MAX_BUF - request->last % MAX_BUF);
         //从连接描述符fd读取数据并复制到用户缓冲区plast 指向位置
         n_read = read(fd, plast, remain_size);
-        perror("read");
+//        perror("read");
 
         //已经读到文件尾或者没有数据可读，断开连接
         if(n_read==0)
@@ -228,12 +228,14 @@ void do_request(void* ptr){
         server_static(fd,filename, sbuf.st_size,out);
 
         //释放返回数据结构
-        free(out);
+
 
         //处理HTTP长连接，控制TCP是否断开连接
-        if(!out->keep_alive)
+        if(out->keep_alive)
             goto close;
 
+
+        free(out);
     }
 
     //一次请求响应结束后并不直接断开TCP连接， 而是重置状态
@@ -242,6 +244,7 @@ void do_request(void* ptr){
     z_epoll_mod(request->epoll_fd, request->fd, request, (EPOLLIN | EPOLLET | EPOLLONESHOT) );
     z_add_timer(request, TIMEOUT_DEFAULT, z_http_close_conn);
 
+    return;
 
     err:
     close:

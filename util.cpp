@@ -113,13 +113,13 @@ void accept_connection(int listen_fd, int epoll_fd, char* path){
         perror("accpt:");
     }
     //设置为非阻塞方式
-//    int rc = make_socket_non_blocking(accept_fd);
+    int rc = make_socket_non_blocking(accept_fd);
     // 申请z_http_request_t 类型的结点并初始化
     z_http_request_t* request = (z_http_request_t*)malloc(sizeof(z_http_request_t));
     z_init_request_t(request, accept_fd, epoll_fd,path);
 
     //文件描述符可读,边缘触发,保证一个socket连接在任意时刻之被一个线程处理
-    z_epoll_add(epoll_fd, accept_fd,request, (EPOLLIN| EPOLLET | EPOLLONESHOT));
+    z_epoll_add(epoll_fd, accept_fd,request, (EPOLLIN | EPOLLET | EPOLLONESHOT));
     z_add_timer(request, TIMEOUT_DEFAULT, z_http_close_conn);
 
 

@@ -5,6 +5,7 @@
 #include "threadpool.h"
 #include <pthread.h>
 #include <stdio.h>
+#include <assert.h>
 //释放线程池
 static int threadpool_free(z_threadpool_t* pool) {
     if(pool == NULL|| pool->started > 0)  //判断线程池是否已经释放过,或者还有正在运行的任务
@@ -29,21 +30,29 @@ static void* threadpool_worker(void *arg)
     while(1)
     {
         pthread_mutex_lock(&(pool->lock));                 //加互斥莎
-        while((pool->queue_size == 0) && !(pool->shutdown))
-            pthread_cond_wait(&(pool->cond),&(pool->lock));   // 当任务队列为空， 并且线程池没有关机 ，等待条件变量解锁
-        printf("a");
+        while((pool->queue_size == 0) && !(pool->shutdown)) {
+            printf("thread 0x%xis waiting\n", pthread_self());
+            pthread_cond_wait(&(pool->cond), &(pool->lock));
+        }// 当任务队列为空， 并且线程池没有关机 ，等待条件变量解锁
+//        printf("a");
         if(pool->shutdown == immediate_shutdown)
             break;
         else if ((pool->shutdown == graceful_shutdown)&&(pool->queue_size==0))
             break;
+
+
 
         task = pool->head->next;                    // 取出head的任务
         if(task==NULL){
             pthread_mutex_unlock(&(pool->lock));
             continue;
         }
-        pool->head->next = task->next;              //摘掉head链表被取出的任务
 
+        printf("thread 0x%x is staring to work\n", pthread_self());
+
+        assert(pool->queue_size !=0);
+        assert(pool->head !=NULL);
+        pool->head->next = task->next;              //摘掉head链表被取出的任务
         pool->queue_size--;
         pthread_mutex_unlock(&(pool->lock));
         printf("a");
