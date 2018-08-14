@@ -6,7 +6,7 @@ Zing is a high performance HTTP WebServer uses the Reactor. Code normative and f
 
 | Part   Ⅰ                                                     | Part  Ⅱ  | Part Ⅲ   | Part  Ⅳ  | Part Ⅴ   | Part  Ⅵ  | Part Ⅶ   | Part Ⅷ   | Part Ⅸ   |
 | ------------------------------------------------------------ | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
-| [项目目的]https://github.com/Mhaoyuan/Zing/blob/master/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E7%9A%84.md | 并发模型 | 核心结构 | 整体结构 | 主要函数 | 遇到问题 | 测试改进 | 背景知识 | 实用教程 |
+| [项目目的](https://github.com/Mhaoyuan/Zing/blob/master/%E9%A1%B9%E7%9B%AE%E7%9B%AE%E7%9A%84.md) | 并发模型 | 核心结构 | 整体结构 | 主要函数 | 遇到问题 | 测试改进 | 背景知识 | 实用教程 |
 
 
 
