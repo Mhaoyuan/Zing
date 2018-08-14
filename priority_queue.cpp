@@ -36,7 +36,7 @@ void exch(z_pq_t* z_pq, size_t i, size_t j){
 void shiftup(z_pq_t* z_pq, size_t k){
     while(k > 1 && z_pq->comp(z_pq->pq[k], z_pq->pq[k/2])) {
         exch (z_pq, k, k/2);
-        k/2;
+        k/=2;
     }
 }
 
@@ -74,7 +74,8 @@ size_t resize(z_pq_t* z_pq, size_t new_capacity){
         return -1;
     memcpy(new_ptr,z_pq->pq, sizeof(void*) * (z_pq->size + 1));
     free(z_pq->pq);
-    z_pq->size = new_capacity;
+    z_pq->pq = new_ptr;
+    z_pq->capacity = new_capacity;
     return 0;
 }
 

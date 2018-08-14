@@ -3,7 +3,7 @@
 //
 
 #include "http_request.h"
-
+#include "epoll.h"
 static int z_http_process_ignore(z_http_request_t* request, z_http_out_t* out, char* data, int len);
 static int z_http_process_connection(z_http_request_t* request, z_http_out_t* out,char *data, int len);
 static int z_http_process_if_modified_since(z_http_request_t *request, z_http_out_t*out, char* data, int len);
@@ -106,6 +106,7 @@ const char* get_shoring_from_status_code(int status_code){
 }
 
 int z_http_close_conn(z_http_request_t* request){
+    z_epoll_del(request->epoll_fd, request->fd, request, (EPOLLIN | EPOLLET | EPOLLONESHOT) );
     close(request->fd);
     free(request);
     return 0;

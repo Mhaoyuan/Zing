@@ -178,18 +178,33 @@ void do_request(void* ptr){
         // remian_size 表示缓冲区当前剩余可写入字节数
         remain_size = MIN(MAX_BUF - (request->last - request->pos) - 1,MAX_BUF - request->last % MAX_BUF);
         //从连接描述符fd读取数据并复制到用户缓冲区plast 指向位置
-        n_read = read(fd, plast, remain_size);
+//        n_read = read(fd, plast, remain_size);
 //        perror("read");
 
         //已经读到文件尾或者没有数据可读，断开连接
-        if(n_read==0)
+//        if(n_read==0)
+//            goto err;
+//        //非EAGIN 错误断开连接
+//        if(n_read < 0 && errno != Z_AGAIN)
+//            goto err;
+//        //Non-blocking 下的errno 返回EAGAIN则重置定时器（进入此循环表示连接被激活），重新组册，在不断开TCP连接的情况下重新等待下一次用户请求
+//        if((n_read< 0)&& (errno == Z_AGAIN|| errno == EWOULDBLOCK))
+//            break;
+
+        if ((n_read=read(fd,plast,remain_size) )< 0){
+            if((errno == EAGAIN) || errno == EWOULDBLOCK){
+                printf("read later");
+                break;
+            }
+            printf("some error happens\n");
             goto err;
-        //非EAGIN 错误断开连接
-        if(n_read < 0 && errno!=Z_AGAIN)
-            goto err;
-        //Non-blocking 下的errno 返回EAGAIN则重置定时器（进入此循环表示连接被激活），重新组册，在不断开TCP连接的情况下重新等待下一次用户请求
-        if((n_read< 0)&& errno == Z_AGAIN)
             break;
+        }
+        else if (n_read == 0)
+            goto close;
+        else {
+            printf("get %d bytes of content: %s\n", n_read,plast);
+        }
 
         //更新读到的总字节数
         request->last+=n_read;
@@ -230,8 +245,11 @@ void do_request(void* ptr){
         //释放返回数据结构
 
 
+
+
+
         //处理HTTP长连接，控制TCP是否断开连接
-        if(out->keep_alive)
+        if(!out->keep_alive)
             goto close;
 
 

@@ -27,4 +27,4 @@ threadpool.o:threadpool.cpp
 
 
 clean:
-	re -rf *.o Zing
+	rm -rf *.o Zing

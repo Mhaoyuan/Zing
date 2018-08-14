@@ -45,12 +45,14 @@ int z_epoll_del(int epoll_fd, int fd, z_http_request_t* request, int events){
     event.data.ptr = (void*)request;
     event.events = events;
     int ret = epoll_ctl(epoll_fd,EPOLL_CTL_DEL,fd, &event);
+    perror("epoll_del");
     if(ret == -1){
         perror("epoll_del");
         return  -1;}
 }
 int z_epoll_wait(int epoll_fd, struct epoll_event* events, int max_events, int timeout ){
     int ret_count = epoll_wait(epoll_fd, events, max_events, timeout);
+    perror("wpoll_wait");
     return ret_count;
 }
 
@@ -70,7 +72,8 @@ void z_handle_events(int epoll_fd, int listen_fd, struct epoll_event* events, in
             // 有事见发生的描述符为连接描述符
             //排除错误事件
             if((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP) || (!(events[i].events & EPOLLIN))){
-                close(fd);
+//                close(fd);
+                z_http_close_conn(request);
                 continue;
             }
             int rc = threadpool_add(tp,do_request,events[i].data.ptr);

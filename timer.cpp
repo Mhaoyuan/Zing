@@ -71,7 +71,9 @@ void z_handle_expire_timers(){
             return;
         }
         //出现了没有被标记删除，但是超时， 调用handle处理（这是因为，任务一直没有执行do_request，可能是在任务队列中，也可能一直没被epoll唤醒）
-        if(timer_node->handler){
+        if(timer_node->handler) {
+
+            printf("请求超时");
             timer_node->handler(timer_node->request);
         }
         int rc = z_pq_delimin(&z_timer);

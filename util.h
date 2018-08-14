@@ -6,7 +6,7 @@
 #define ZING_UTIL_H
 
 #define PATHLEN 128
-#define LISTENQ 1024
+#define LISTENQ 81920
 #define BUFIEN 8192
 #define DELIM "="
 #define Z_CONF_OK  0

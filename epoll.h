@@ -11,7 +11,7 @@
 #include "http_request.h"
 
 
-#define MAXEVENTS 1024
+#define MAXEVENTS 1638400
 
 int z_epoll_create(int flags);
 int z_epoll_add(int epoll_fd , int fd,z_http_request_t* request, int events);

@@ -3,6 +3,7 @@
 #include "threadpool.h"
 #include "list.h"
 #include "epoll.h"
+#include <sys/resource.h>
 using namespace std;
 
 #define DEFAULT_CONFIG "Zconf.conf"
@@ -10,6 +11,7 @@ using namespace std;
 extern struct epoll_event* events;
 char* conf_file = DEFAULT_CONFIG;
 Z_conf_t conf;
+struct rlimit rt;
 
 int main() {
 
@@ -21,19 +23,25 @@ int main() {
     int listen_fd = socket_bind_listen(conf.port);
 
     //设置socket为非阻塞
-    int rc = make_socket_non_blocking(listen_fd);
 
+//    int rc = make_socket_non_blocking(listen_fd);
     //创建epoll并组册监听描述符
-    int epoll_fd = z_epoll_create(16384);
+    int epoll_fd = z_epoll_create(1024);
     z_http_request_t* request = (z_http_request_t*)malloc(sizeof(z_http_request_t));
     z_init_request_t(request,listen_fd, epoll_fd, conf.root);
-    z_epoll_add(epoll_fd, listen_fd, request, (EPOLLIN | EPOLLET));
+    z_epoll_add(epoll_fd, listen_fd, request, (EPOLLIN ));
+//    z_epoll_add(epoll_fd, listen_fd, request, EPOLLIN);
 
     // 初始化线程池
     z_threadpool_t* tp = threadpool_init(conf.thread_num);
 
     //初始化计时器
             z_timer_init();
+//    rt.rlim_max = rt.rlim_cur = 1000000;
+//    if (setrlimit(RLIMIT_NOFILE, &rt) == -1) {
+//        perror("setrlimit");
+//        exit(1);
+//    }
     while(1){
         //得到最近为删除时间和当前时间(等待时间)
         int time = z_find_timer();

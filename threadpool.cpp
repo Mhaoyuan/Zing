@@ -31,7 +31,8 @@ static void* threadpool_worker(void *arg)
     {
         pthread_mutex_lock(&(pool->lock));                 //加互斥莎
         while((pool->queue_size == 0) && !(pool->shutdown)) {
-            printf("thread 0x%xis waiting\n", pthread_self());
+
+            printf("thread 0x%xis waiting,\n", pthread_self());
             pthread_cond_wait(&(pool->cond), &(pool->lock));
         }// 当任务队列为空， 并且线程池没有关机 ，等待条件变量解锁
 //        printf("a");
@@ -55,7 +56,6 @@ static void* threadpool_worker(void *arg)
         pool->head->next = task->next;              //摘掉head链表被取出的任务
         pool->queue_size--;
         pthread_mutex_unlock(&(pool->lock));
-        printf("a");
         (*(task->fun))(task->arg);
         free(task);
     }
@@ -176,6 +176,7 @@ int threadpool_add(z_threadpool_t* pool, void (*func)(void *), void *arg){
     task->next = pool->head->next;
     pool->head->next = task;
     pool->queue_size++;
+    printf("queue_size = %d",pool->queue_size);
 
     rc = pthread_cond_signal(&(pool->cond));
 

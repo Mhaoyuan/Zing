@@ -97,18 +97,19 @@ int socket_bind_listen(int port){
 
 int make_socket_non_blocking(int fd){
     int flag = fcntl(fd,F_GETFL,0);
-    if(flag -1 )
+    if(flag ==-1 )
         return -1;
     flag|=O_NONBLOCK;
-    if(fcntl(fd, F_SETFL, flag) ==-1)
+    if(fcntl(fd, F_SETFL, flag) == -1)
         return -1;
 }
 
 void accept_connection(int listen_fd, int epoll_fd, char* path){
     struct sockaddr_in client_addr;
     memset(&client_addr, 0 , sizeof(struct sockaddr_in));
-    socklen_t client_addr_len = 0;
+    socklen_t client_addr_len ;
     int accept_fd = accept(listen_fd, (struct sockaddr*)&client_addr, &client_addr_len);
+    printf("accept_fd = %d\n", accept_fd);
     if(accept_fd==-1) {
         perror("accpt:");
     }
@@ -121,6 +122,28 @@ void accept_connection(int listen_fd, int epoll_fd, char* path){
     //文件描述符可读,边缘触发,保证一个socket连接在任意时刻之被一个线程处理
     z_epoll_add(epoll_fd, accept_fd,request, (EPOLLIN | EPOLLET | EPOLLONESHOT));
     z_add_timer(request, TIMEOUT_DEFAULT, z_http_close_conn);
+//
+//    int accept_fd;
+//    while((accept_fd = accept(listen_fd, (struct sockaddr*)&client_addr, &client_addr_len))  > 0) {
+//        printf("accept_fd = %d\n", accept_fd);
+////        if (accept_fd == -1) {
+////            perror("accpt:");
+////        }
+//        //设置为非阻塞方式
+//        int rc = make_socket_non_blocking(accept_fd);
+//        // 申请z_http_request_t 类型的结点并初始化
+//        z_http_request_t *request = (z_http_request_t *) malloc(sizeof(z_http_request_t));
+//        z_init_request_t(request, accept_fd, epoll_fd, path);
+//
+//        //文件描述符可读,边缘触发,保证一个socket连接在任意时刻之被一个线程处理
+//        z_epoll_add(epoll_fd, accept_fd, request, (EPOLLIN | EPOLLET | EPOLLONESHOT));
+//        z_add_timer(request, TIMEOUT_DEFAULT, z_http_close_conn);
+//    }
+//    if (accept_fd == -1)
+//    {
+//        if (errno != EAGAIN && errno != ECONNABORTED && errno != EPROTO && errno != EINTR)
+//            perror("accept");
+//    }
 
 
 }
