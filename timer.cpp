@@ -20,6 +20,7 @@ void z_time_update(){
     struct timeval tv;
     int rc = gettimeofday(&tv, NULL);
     z_current_msec = ((tv.tv_sec* 1000)+(tv.tv_usec / 1000));
+
 }
 
 int z_timer_init(){
@@ -59,11 +60,17 @@ void z_handle_expire_timers(){
         z_time_update();
         z_timer_t* timer_node = (z_timer_t*)z_pq_min(&z_timer);
         //如果以删除释放此结点
-        if(timer_node->deleted){
+        if(timer_node->deleted) {
             int rc = z_pq_delimin(&z_timer);
             free(timer_node);
             continue;
+
         }
+
+//            int rc = z_pq_delimin(&z_timer);
+//            free(timer_node);
+//            continue;
+
         //最早加入的结点大于最近时间（未超时）
         //结束超时检查
         if(timer_node->key > z_current_msec)
@@ -74,10 +81,17 @@ void z_handle_expire_timers(){
         if(timer_node->handler) {
 
             printf("请求超时");
+//            if (timer_node->request == NULL)
+//                return;
             timer_node->handler(timer_node->request);
+            free(timer_node->request);
+
         }
+//        free(timer_node->request);
         int rc = z_pq_delimin(&z_timer);
         free(timer_node);
+
+
     }
 }
 

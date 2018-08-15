@@ -193,9 +193,10 @@ void do_request(void* ptr){
 
         if ((n_read=read(fd,plast,remain_size) )< 0){
             if((errno == EAGAIN) || errno == EWOULDBLOCK){
-                printf("read later");
+//                printf("read later");
                 break;
             }
+            perror("read");
             printf("some error happens\n");
             goto err;
             break;
@@ -237,6 +238,8 @@ void do_request(void* ptr){
         if(error_process(&sbuf, filename,fd))
             continue;
         //获取文件最后一次修改时间
+
+        z_http_handle_header(request,out);
         out->mtime = sbuf.st_mtime;
 
         //处理静态请求文件类型
@@ -249,11 +252,13 @@ void do_request(void* ptr){
 
 
         //处理HTTP长连接，控制TCP是否断开连接
-        if(!out->keep_alive)
+        if(out->keep_alive) {
+            free(out);
             goto close;
-
+        }
 
         free(out);
+
     }
 
     //一次请求响应结束后并不直接断开TCP连接， 而是重置状态

@@ -108,6 +108,11 @@ const char* get_shoring_from_status_code(int status_code){
 int z_http_close_conn(z_http_request_t* request){
     z_epoll_del(request->epoll_fd, request->fd, request, (EPOLLIN | EPOLLET | EPOLLONESHOT) );
     close(request->fd);
-    free(request);
+//    z_timer_t *tem_timer =  (z_timer_t*)request->timer;
+//    free(request);
+//    request = NULL;
+//    tem_timer->request = NULL;
+
+
     return 0;
 }

@@ -22,7 +22,7 @@ typedef struct z_timer{
 }z_timer_t;
 
 extern z_pq_t z_timer;
-extern size_t z_current_mesc;
+extern size_t z_current_msec;
 
 int z_timer_init();
 int z_find_timer();

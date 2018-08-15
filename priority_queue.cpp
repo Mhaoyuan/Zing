@@ -85,7 +85,7 @@ int z_pq_delimin(z_pq_t *z_pq){
     if(z_pq_is_empty(z_pq))
         return 0;
     exch(z_pq, 1, z_pq->size);          // 把第一个元素与最后一个交换， size --
-    --z_pq->size;
+    --(z_pq->size);
     shiftdown(z_pq,1);                  // 对第一个元素进行shiftdown 操作，保证最小堆性质
     if((z_pq->size> 0)&& (z_pq->size <=(z_pq->capacity-1)/4))  // 若元素个数小于空间的1/4， 进行缩容至原本大小的的1/2；
     {

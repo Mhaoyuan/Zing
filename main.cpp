@@ -26,7 +26,7 @@ int main() {
 
 //    int rc = make_socket_non_blocking(listen_fd);
     //创建epoll并组册监听描述符
-    int epoll_fd = z_epoll_create(1024);
+    int epoll_fd = z_epoll_create(10240);
     z_http_request_t* request = (z_http_request_t*)malloc(sizeof(z_http_request_t));
     z_init_request_t(request,listen_fd, epoll_fd, conf.root);
     z_epoll_add(epoll_fd, listen_fd, request, (EPOLLIN ));

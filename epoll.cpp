@@ -21,9 +21,12 @@ int z_epoll_add(int epoll_fd, int fd, z_http_request_t* request, int events){
     event.data.ptr = (void*)request;
     event.events = events;
     int ret = epoll_ctl(epoll_fd, EPOLL_CTL_ADD, fd, &event);
-    perror("epoll_ctl");
-    if (ret == -1)
-        return  -1;
+
+    if (ret == -1) {
+        perror("epoll_ctl");
+        return -1;
+
+    }
 }
 
 //修改描述符状态
@@ -33,7 +36,7 @@ int z_epoll_mod(int epoll_fd, int fd, z_http_request_t* request, int events){
     event.data.ptr = (void*)request;
     event.events = events;
     int ret = epoll_ctl(epoll_fd, EPOLL_CTL_MOD, fd, &event);
-    perror("epoll_ctl");
+//    perror("epoll_ctl");
     if(ret == -1)
         return -1;
 }
@@ -45,21 +48,22 @@ int z_epoll_del(int epoll_fd, int fd, z_http_request_t* request, int events){
     event.data.ptr = (void*)request;
     event.events = events;
     int ret = epoll_ctl(epoll_fd,EPOLL_CTL_DEL,fd, &event);
-    perror("epoll_del");
+//    perror("epoll_del");
     if(ret == -1){
         perror("epoll_del");
         return  -1;}
 }
 int z_epoll_wait(int epoll_fd, struct epoll_event* events, int max_events, int timeout ){
     int ret_count = epoll_wait(epoll_fd, events, max_events, timeout);
-    perror("wpoll_wait");
+    if (ret_count < 0)
+        perror("wpoll_wait");
     return ret_count;
 }
 
 //分发处理函数
 void z_handle_events(int epoll_fd, int listen_fd, struct epoll_event* events, int events_num, char* path, z_threadpool_t* tp){
     for(int i = 0;i <events_num; i++){
-        printf("events_num = %d\n",events_num );
+//        printf("events_num = %d\n",events_num );
         //获取有事件产生的描述符
         z_http_request_t* request = (z_http_request_t*)(events[i].data.ptr);
         int fd = request->fd;
