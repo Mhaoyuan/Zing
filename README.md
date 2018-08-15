@@ -2,6 +2,8 @@
 
 Zing is a high performance HTTP WebServer uses the Reactor. Code normative and functional scalability are close to the industry level.The projec will be until feature have been completed. Hava a fun. Whu,Zing
 
+![2018-08-15 13-56-56屏幕截图](/home/genius/Pictures/2018-08-15 13-56-56屏幕截图.png)
+
 # Dev document
 
 | Part   Ⅰ                                                     | Part  Ⅱ                                                      | Part Ⅲ   | Part  Ⅳ  | Part Ⅴ   | Part  Ⅵ  | Part Ⅶ   | Part Ⅷ   | Part Ⅸ   |
